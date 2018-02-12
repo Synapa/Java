@@ -79,7 +79,7 @@ public class Deck {
 			tempCount -= 1.0;
 			test = "-1";
 		}
-		Game.getInstance().centeredTextGui(drawnCard.cardToString() +" : COUNT VALUE : "+  test, '*');
+		
 		Game.getInstance().setGameCount(tempCount);
 		
 		return drawnCard;
