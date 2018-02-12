@@ -80,8 +80,7 @@ public final class Game {
 			isHit = false;
 			getInputForPlayerStake();
 			initialiseStartingHands();
-			printGameInfo();
-			getInputForPlayerChoice();
+			
 		}
 	}
 
@@ -91,6 +90,26 @@ public final class Game {
 		instance.dealer.setDealersHand(new Hand(instance.gameDeck.draw()));
 		instance.player.getPlayerHand().addCardToHand(instance.gameDeck.draw());
 		instance.dealer.getDealersHand().addCardToHand(instance.gameDeck.draw());
+		int handValue = instance.player.getPlayerHand().getHandValue();
+		
+		if (handValue == 21 && instance.dealer.getDealersHand().getHandValue() == 21) {
+			centeredTextGui("Player Draws", '*');
+			printGameInfo();
+			
+		} else if (handValue == 21 && instance.dealer.getDealersHand().getHandValue() != 21) {
+			centeredTextGui("Player BlackJack", '*');
+			printGameInfo();
+			instance.player.setPlayerBalance((instance.player.getPlayerBalance() + instance.player.getPlayerStake()));
+			
+		} else if (handValue != 21 && instance.dealer.getDealersHand().getHandValue() == 21) {
+			centeredTextGui("Dealer BlackJack", '*');
+			instance.player.setPlayerBalance((instance.player.getPlayerBalance() - instance.player.getPlayerStake()));
+			printGameInfo();
+			}
+		else {
+			printGameInfo();
+			getInputForPlayerChoice();
+		}
 		
 	}
 
